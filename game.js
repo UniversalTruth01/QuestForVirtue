@@ -28,13 +28,14 @@ const scenes = {
         text: "Welcome to the Quest for Virtue, where you embark on an adventure to discover and embody core        values that make you a hero!",
         image: "home-image.png",
         options: [
-            { text: "Enter the Whispering Woods", nextScene: "whisperingWoods" },
+            { text: "Enter the Enchanted Forest", nextScene: "whisperingWoods" },
             { text: "Ascend to the Mystic Mountain", nextScene: "mysticMountain" },
             { text: "Explore the Royal Castle", nextScene: "royalCastle" }
         ]
     },
+    // The Whispering Woods start here
     whisperingWoods: {
-        text: "You enter the Whispering Woods. Ancient trees whisper secrets around you...",
+        text: "You enter the Enchanted Forest. Ancient trees whisper secrets around you...",
         image: "./img/whisperingwoods.png",
         options: [
             { text: "The Lost Faerie", action: function() {
@@ -269,39 +270,79 @@ FindADetour: {
     ]
 },
 
+    // The Mystic Mountains start here
 
 
 
+    // The Royal Castle starts here
 
-
-
-
-
-
-
-
-
-    mysticMountain: {
-        text: "You ascend towards the Mystic Mountain. Crystalline streams flow amidst towering peaks...",
-        options: [
-            { text: "Ascend to the Celestial Summit", action: function() {
-                gameState.gems.spirituality = true;
-                gameState.currentScene = "celestialSummit";
-                updateGame();
-            }},
-            { text: "Explore the Crystal Caverns", action: function() {
-                gameState.currentScene = "crystalCaverns";
-                updateGame();
-            }}
-        ]
-    },
     royalCastle: {
         text: "You arrive at the majestic Royal Castle. Turrets rise towards the sky and banners flutter in the breeze...",
+        image: "./img/royalcastle.png",
         options: [
-            { text: "Visit the Royal Library", nextScene: "royalLibrary" },
-            { text: "Attend the Royal Court", nextScene: "royalCourt" }
+            { text: "Grand Courtyard", nextScene: "GrandCourtyard" },
+            { text: "Enchanted Gardens", nextScene: "EnchantedGardens" }
         ]
     },
+    GrandCourtyard: {
+        text: "To the right, a path leads into the Grand Courtyard, where noble knights practice their skills, merchants sell exotic goods, and musicians entertain guests with lively tunes.",
+        image: "./img/grandcourtyard.png",
+        options: [
+            { text: "Challenge a Knight", action: function() {
+                gameState.gems.courage = true;
+                gameState.currentScene = "ChallengeAKnight";
+               updateGame();
+            }},
+            { text: "Visit the Merchants", nextScene: "VisitTheMerchants" },
+        ]
+    },
+    EnchantedGardens: {
+        text: "To the left, a path winds through the Enchanted Gardens, where exotic flowers bloom in vibrant colors and magical creatures play among the foliage.",
+        image: "./img/enchantedgardens.png",
+        options: [
+            { text: "Explore the Gardens", action: function() {
+                gameState.gems.harmony = true;
+                gameState.currentScene = "ExploreTheGardens";
+               updateGame();
+            }},
+            { text: "Seek Wisdom from a Sage", nextScene: "SeekWisdomFromASage" },
+        ]
+    },
+    ChallengeAKnight: {
+        text: "Approaching a noble knight, you engage in a friendly duel, testing your skills and demonstrating courage in the face of a worthy opponent. By showcasing your bravery and determination, you earn a shining gem of Courage, symbolizing your ability to face challenges head-on. Your journey continues with enhanced courage, navigating through a diplomatic challenge that requires tact and grace.",
+        image: "./img/grandcourtyard.png",
+        options: [
+            { text: "Royal Library", nextScene: "RoyalLibrary" },
+            { text: "Throne Room", nextScene: "ThroneRoom" }
+        ]
+    },
+    VisitTheMerchants: {
+        text: "Browsing the merchants' stalls, you engage in conversations and learn about their unique goods and trades, gaining insights into the castle's economy and culture. By showing interest and respect, you receive a sparkling gem of Curiosity, symbolizing your thirst for knowledge and exploration. Your journey continues with newfound curiosity, avoiding a misunderstanding with a visiting diplomat that could have strained relations.",
+        image: "./img/grandcourtyard.png",
+        options: [
+            { text: "Royal Library", nextScene: "RoyalLibrary" },
+            { text: "Throne Room", nextScene: "ThroneRoom" }
+        ]
+    },
+    ExploreTheGardens: {
+        text: "Wandering through the Enchanted Gardens, you marvel at the exotic flowers and playful magical creatures, immersing yourself in the beauty and tranquility. By appreciating the natural world and its wonders, you earn a radiant gem of Harmony, symbolizing your ability to find peace and balance in nature. Your journey continues with enhanced harmony, navigating through a social gathering with grace and diplomacy.",
+        image: "./img/enchantedgardens.png",
+        options: [
+            { text: "Royal Library", nextScene: "RoyalLibrary" },
+            { text: "Throne Room", nextScene: "ThroneRoom" }
+        ]
+    },
+    SeekWisdomFromASage: {
+        text: "Finding the wise sage in a secluded area of the Enchanted Gardens, you seek their counsel and learn about the castle's history, traditions, and hidden secrets. By showing respect and humility, you receive a glowing gem of Wisdom, symbolizing your deepened understanding and insight into the kingdom's lore. Your journey continues with newfound wisdom, navigating through a complex political intrigue that tests your diplomatic skills.",
+        image: "./img/enchantedgardens.png",
+        options: [
+            { text: "Royal Library", nextScene: "RoyalLibrary" },
+            { text: "Throne Room", nextScene: "ThroneRoom" }
+        ]
+    },
+
+
+    /*
     royalLibrary: {
         text: "You enter the Royal Library, filled with ancient tomes and scrolls...",
         options: [
@@ -346,18 +387,6 @@ FindADetour: {
         options: [
             { text: "Proceed Deeper into the Woods", nextScene: "whisperingWoods" },
             { text: "Return to the Crossroads", nextScene: "start" }
-        ]
-    },
-    celestialSummit: {
-        text: "You reach the Celestial Summit, where celestial beings share profound insights...",
-        options: [
-            { text: "Embrace the Wisdom", nextScene: "mysticMountain" }
-        ]
-    },
-    crystalCaverns: {
-        text: "You explore the Crystal Caverns, uncovering rare crystals and their mystical energies...",
-        options: [
-            { text: "Gather Luminous Crystals", nextScene: "mysticMountain" }
         ]
     },
     ancientLore: {
@@ -433,6 +462,7 @@ FindADetour: {
             { text: "Return to the Path", nextScene: "start" }
         ]
     }
+    */
 };
 
 // Function to update the game interface with current scene and options
