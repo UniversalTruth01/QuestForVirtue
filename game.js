@@ -339,9 +339,7 @@ FindADetour: {
             { text: "Royal Library", nextScene: "RoyalLibrary" },
             { text: "Throne Room", nextScene: "ThroneRoom" }
         ]
-    },
-
-
+    }, // NEXT PART HERE
     /*
     royalLibrary: {
         text: "You enter the Royal Library, filled with ancient tomes and scrolls...",
