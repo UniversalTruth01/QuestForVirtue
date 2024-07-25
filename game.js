@@ -489,7 +489,7 @@ FindADetour: {
 
 //--------------------------------------------------\\
 
-    //Start of the Royal Castle
+    //Royal Castle starts here
     royalCastle: {
         text: "Your arrive at the majestic Royal Castle. Turrets rise towards the sky and banners slutter in the breeze...",
         image: "./img/royalcastle.png",
