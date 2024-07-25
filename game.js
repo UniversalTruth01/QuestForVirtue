@@ -492,7 +492,7 @@ FindADetour: {
     //Start of the Royal Castle
     royalCastle: {
         text: "Your arrive at the majestic Royal Castle. Turrets rise towards teh sky and banners slutter in the breeze...",
-        image: "./img/royalCastle.png",
+        image: "./img/royalcastle.png",
         options: [
             {text: "Go to the Royal Library", nextScene: "royalLibrary"},
             {text: "Go to the Throne Room", nextScene: "throneRoom"},
