@@ -501,7 +501,7 @@ FindADetour: {
         ]
     },
 
-    //Royal Library Option
+    //Royal Library starts here
     royalLibrary: {
         text: "Passing through the breath-taking front gate of the castle, you find yourself being drawn to a spiriling tower reaching for the sky. Pushing the massive wooden door to the side reveals a sprawling library packed with books and scholars.",
         image: "./img/royalLibrary.png",
