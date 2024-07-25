@@ -7,20 +7,24 @@ let gameState = {
         knowledge: false,
         harmony: false,
         leadership: false,
-        spirituality: false
-        // Add more gem types as needed
+        spirituality: false,
+        kindness: false,
+        resourcefulness: false,
+        creativity: false,
+        compassion: false,
+        unity: false
     }
 };
 
-// Player inventory and stats
-let playerState = {
-    inventory: [],
-    stats: {
-        strength: 10,
-        magic: 5,
-        diplomacy: 8
-    }
-};
+function countTrueGems() {
+    let trueGemsCount = 0; 
+    for (let gem in gameState.gems)
+   { 
+    if (gameState.gems[gem] === true)
+   { trueGemsCount++; } 
+   }
+    return trueGemsCount;
+   }
 
 // Scenes and choices
 const scenes = {
@@ -266,201 +270,372 @@ FindADetour: {
     image: "./img/twilightmarsh.png",
     options: [
         { text: "Go to the Mystic Mountains!", nextScene: "mysticMountain" },
-        { text: "Go to home page", nextScene: "start" }
+        { text: "Return home", nextScene: "start" }
     ]
 },
 
     // The Mystic Mountains start here
-
-
-
-    // The Royal Castle starts here
-
-    royalCastle: {
-        text: "You arrive at the majestic Royal Castle. Turrets rise towards the sky and banners flutter in the breeze...",
-        image: "./img/royalcastle.png",
+    mysticMountain: {
+        text: "You ascend towards the Mystic Mountain. Crystalline streams flow amidst towering peaks...",
+        image: "./img/mysticmountain.png",
         options: [
-            { text: "Grand Courtyard", nextScene: "GrandCourtyard" },
-            { text: "Enchanted Gardens", nextScene: "EnchantedGardens" }
-        ]
-    },
-    GrandCourtyard: {
-        text: "To the right, a path leads into the Grand Courtyard, where noble knights practice their skills, merchants sell exotic goods, and musicians entertain guests with lively tunes.",
-        image: "./img/grandcourtyard.png",
-        options: [
-            { text: "Challenge a Knight", action: function() {
-                gameState.gems.courage = true;
-                gameState.currentScene = "ChallengeAKnight";
-               updateGame();
-            }},
-            { text: "Visit the Merchants", nextScene: "VisitTheMerchants" },
-        ]
-    },
-    EnchantedGardens: {
-        text: "To the left, a path winds through the Enchanted Gardens, where exotic flowers bloom in vibrant colors and magical creatures play among the foliage.",
-        image: "./img/enchantedgardens.png",
-        options: [
-            { text: "Explore the Gardens", action: function() {
-                gameState.gems.harmony = true;
-                gameState.currentScene = "ExploreTheGardens";
-               updateGame();
-            }},
-            { text: "Seek Wisdom from a Sage", nextScene: "SeekWisdomFromASage" },
-        ]
-    },
-    ChallengeAKnight: {
-        text: "Approaching a noble knight, you engage in a friendly duel, testing your skills and demonstrating courage in the face of a worthy opponent. By showcasing your bravery and determination, you earn a shining gem of Courage, symbolizing your ability to face challenges head-on. Your journey continues with enhanced courage, navigating through a diplomatic challenge that requires tact and grace.",
-        image: "./img/grandcourtyard.png",
-        options: [
-            { text: "Royal Library", nextScene: "RoyalLibrary" },
-            { text: "Throne Room", nextScene: "ThroneRoom" }
-        ]
-    },
-    VisitTheMerchants: {
-        text: "Browsing the merchants' stalls, you engage in conversations and learn about their unique goods and trades, gaining insights into the castle's economy and culture. By showing interest and respect, you receive a sparkling gem of Curiosity, symbolizing your thirst for knowledge and exploration. Your journey continues with newfound curiosity, avoiding a misunderstanding with a visiting diplomat that could have strained relations.",
-        image: "./img/grandcourtyard.png",
-        options: [
-            { text: "Royal Library", nextScene: "RoyalLibrary" },
-            { text: "Throne Room", nextScene: "ThroneRoom" }
-        ]
-    },
-    ExploreTheGardens: {
-        text: "Wandering through the Enchanted Gardens, you marvel at the exotic flowers and playful magical creatures, immersing yourself in the beauty and tranquility. By appreciating the natural world and its wonders, you earn a radiant gem of Harmony, symbolizing your ability to find peace and balance in nature. Your journey continues with enhanced harmony, navigating through a social gathering with grace and diplomacy.",
-        image: "./img/enchantedgardens.png",
-        options: [
-            { text: "Royal Library", nextScene: "RoyalLibrary" },
-            { text: "Throne Room", nextScene: "ThroneRoom" }
-        ]
-    },
-    SeekWisdomFromASage: {
-        text: "Finding the wise sage in a secluded area of the Enchanted Gardens, you seek their counsel and learn about the castle's history, traditions, and hidden secrets. By showing respect and humility, you receive a glowing gem of Wisdom, symbolizing your deepened understanding and insight into the kingdom's lore. Your journey continues with newfound wisdom, navigating through a complex political intrigue that tests your diplomatic skills.",
-        image: "./img/enchantedgardens.png",
-        options: [
-            { text: "Royal Library", nextScene: "RoyalLibrary" },
-            { text: "Throne Room", nextScene: "ThroneRoom" }
-        ]
-    }, // NEXT PART HERE
-    /*
-    royalLibrary: {
-        text: "You enter the Royal Library, filled with ancient tomes and scrolls...",
-        options: [
-            { text: "Research Ancient Lore", action: function() {
-                gameState.gems.knowledge = true;
-                gameState.currentScene = "ancientLore";
-                addToInventory("Ancient Tome");
+            {text: "Ascend to the Celestial Summit", action: function() {
+                gameState.gems.spirituality = true;
+                gameState.currentScene = "celestialSummit";
                 updateGame();
             }},
-            { text: "Seek Guidance from the Librarian", action: function() {
-                gameState.currentScene = "librarianGuidance";
-                updateGame();
-            }}
-        ]
-    },
-    royalCourt: {
-        text: "You attend the Royal Court, where decisions shaping the kingdom's fate are made...",
-        options: [
-            { text: "Present Your Ideas to the Monarch", action: function() {
-                gameState.gems.leadership = true;
-                gameState.currentScene = "presentIdeas";
-                updateStats('diplomaticChoice');
-                updateGame();
-            }},
-            { text: "Observe Court Proceedings", action: function() {
-                gameState.currentScene = "observeProceedings";
+            {text: "Explore the Crystal Caverns", action: function() {
+                gameState.currentScene = "crystalCaverns";
                 updateGame();
             }}
         ]
     },
 
+    //Celestial Summit Option
+    celestialSummit: {
+        text: "A path veers off to the right, a narrow trail winds upward towards the Celestial Summit, rumored to be a place where the stars themselves come down to touch the earth. The trail is steep and challenging, but promises breathtaking views and encounters with celestial beings.",
+        image: "./img/celestialsummit.png",
+        options: [
+            {text: "Ascend to the Celestial Summit", action: function() {
+                gameState.gems.spirituality = true;
+                gameState.currentScene = "AscendToTheCelestialSummit";
+                updateGame();
+            }},
+            {text: "Take a Different Path", nextScene: "takeADifferentPath"},
+        ]
+    },
+
+    AscendToTheCelestialSummit: {
+        text: "Embracing the challenge, you ascend the steep trail towards the Celestial Summit. Along the way, you encounter tests of endurance and moments where courage is required to overcome obstacles. Upon reaching the summit, you are greeted by celestial beings who impart wisdom and grant you a radiant gem of Spirituality, symbolizing your connection with the higher realms. Your journey continues with renewed insight and a clearer path forward, bypassing a treacherous avalanche that would have otherwise blocked your way.",
+        image: "./img/celestialsummit.png",
+        options: [
+            {text: "Wisdom's Path", nextScene: "wisdomsPath"},
+            {text: "Stormy Pass", nextScene: "stormyPass"}
+        ]
+    },
     
-
-
-
-
-
-
-
-    shiftingPaths: {
-        text: "You navigate the shifting paths with caution, avoiding traps and finding hidden treasures...",
+    takeADifferentPath: {
+        text: "Opting for a safer route, you choose to explore a longer path that avoids the challenges of the Celestial Summit. While you navigate safely, you miss the opportunity to gain Enlightenment from the celestial beings and encounter a series of intricate puzzles that test your intellect along the way.",
+        image: "./img/celestialsummit.png",
         options: [
-            { text: "Proceed Deeper into the Woods", nextScene: "whisperingWoods" },
-            { text: "Return to the Crossroads", nextScene: "start" }
+            {text: "Wisdom's Path", nextScene: "wisdomsPath"},
+            {text: "Stormy Pass", nextScene: "stormyPass"}
         ]
     },
-    ancientLore: {
-        text: "You delve into ancient lore, discovering lost knowledge and forgotten legends...",
+
+    //Crystal Caverns Option
+    crystalCaverns: {
+        text: "To the left, a path leads into the heart of the mountains, where Crystal Caverns glitter with gemstones of every hue. The caverns are known for their beauty and mysterious powers.",
+        image: "./img/crystalcaverns.png",
         options: [
-            { text: "Continue Your Research", nextScene: "royalLibrary" }
-        ]
-    },
-    librarianGuidance: {
-        text: "The librarian imparts their wisdom, shedding light on the castle's history and mysteries...",
-        options: [
-            { text: "Thank the Librarian", nextScene: "royalLibrary" }
-        ]
-    },
-    presentIdeas: {
-        text: "You present your ideas to the monarch, influencing decisions that shape the kingdom's future...",
-        options: [
-            { text: "Attend to Kingdom Matters", nextScene: "royalCourt" }
-        ]
-    },
-    observeProceedings: {
-        text: "You observe court proceedings, gaining insights into the kingdom's governance and challenges...",
-        options: [
-            { text: "Reflect on What You've Learned", nextScene: "royalCourt" }
-        ]
-    },
-    // Additional scenes and choices
-    secretGrove: {
-        text: "You discover a hidden grove filled with mystical creatures and glowing flowers...",
-        options: [
-            { text: "Befriend the Creatures", action: function() {
+            {text: "Explore the Crystal Caverns", action: function() {
                 gameState.gems.harmony = true;
-                gameState.currentScene = "befriendCreatures";
+                gameState.currentScene = "ExploreTheCrystalCaverns";
                 updateGame();
             }},
-            { text: "Explore Further", action: function() {
-                gameState.currentScene = "exploreFurtherGrove";
-                updateGame();
-            }}
+            {text: "Bypass the Caverns", nextScene: "BypassTheCaverns"},
         ]
     },
-    befriendedCreatures: {
-        text: "You establish a bond with the mystical creatures, gaining their trust and learning their secrets...",
+
+    ExploreTheCrystalCaverns: {
+        text: "Intrigued by the beauty and mystique of the Crystal Caverns, you venture into their depths. Inside, you encounter shimmering gemstones that seem to pulse with energy and ancient runes carved into the walls. By deciphering the runes and respecting the caverns' natural balance, you earn a sparkling gem of Harmony, reflecting your ability to find balance and peace in chaotic surroundings. Your journey continues with enhanced harmony, navigating through a labyrinth of crystalline formations that would have otherwise disoriented you.",
+        image: "./img/crystalcaverns.png",
         options: [
-            { text: "Continue Exploring the Grove", nextScene: "secretGrove" },
-            { text: "Return to the Path", nextScene: "start" }
+            {text: "Wisdom's Path", nextScene: "wisdomsPath"},
+            {text: "Stormy Pass", nextScene: "stormyPass"}
         ]
     },
-    exploreFurtherGrove: {
-        text: "You uncover a hidden spring with healing waters and a forgotten relic...",
+
+    BypassTheCaverns: {
+        text: "Opting to bypass the Crystal Caverns, you skirt around their entrances, avoiding potential dangers or distractions within. While you proceed without incident, you miss the opportunity to uncover Inner Strength from the caverns' challenges and encounter a steep, rocky path that requires careful navigation.",
+        image: "./img/crystalcaverns.png",
         options: [
-            { text: "Take the Relic", action: function() {
-                addToInventory("Forgotten Relic");
-                gameState.currentScene = "takeRelic";
+            {text: "Wisdom's Path", nextScene: "wisdomsPath"},
+            {text: "Stormy Pass", nextScene: "stormyPass"}
+        ]
+    },
+
+    //Wisdom's Path Option
+    wisdomsPath: {
+        text: "To the right, a path veers towards a serene plateau known as Wisdom's Path, where ancient sages once meditated and communed with nature.",
+        image: "./img/wisdomsPath.png",
+        options: [
+            { text: "Meditate at Wisdom's Path", action: function() {
+                gameState.gems.wisdom = true;
+                gameState.currentScene = "meditateAtWisdomsPath";
                 updateGame();
             }},
-            { text: "Study the Healing Waters", action: function() {
-                gameState.currentScene = "studyWaters";
+            {text: "Continue Exploring", nextScene: "continueExploring"},
+        ]
+    },
+
+    meditateAtWisdomsPath: {
+        text: "Choosing to meditate at Wisdom's Path, you find a sense of peace and clarity as you connect with the ancient wisdom of the sages. Inspired by your introspection, you receive a radiant gem of Wisdom, symbolizing your deepened understanding and insight. Your journey continues with renewed purpose and foresight, avoiding a treacherous cliffside that would have otherwise posed a danger.",
+        image: "./img/wisdomsPath.png",
+        options: [
+            {text: "Whispering Forest", nextScene: "whisperingForest"},
+            {text: "Luminous Peak", nextScene: "luminousPeak"}
+        ]
+    },
+
+    continueExploring: {
+        text: "TEXTOpting to bypass Wisdom's Path and continue exploring the mountain, you remain focused on uncovering more of its secrets. While you proceed with determination, you miss the opportunity to gain Reflection from the serene environment and encounter a steep, rocky descent that tests your agility.",
+        image: "./img/wisdomsPath.png",
+        options: [
+            {text: "Whispering Forest", nextScene: "whisperingForest"},
+            {text: "Luminous Peak", nextScene: "luminousPeak"}
+        ]
+    },
+
+    //Stormy Pass Option
+    stormyPass: {
+        text: "To the left, a rugged trail leads into Stormy Pass, where dark clouds gather ominously and lightning crackles in the distance.",
+        image: "./img/stormyPass.png",
+        options: [
+            {text: "Brave the Storm", action: function() {
+                gameState.gems.resilience = true;
+                gameState.currentScene = "braveTheStorm";
                 updateGame();
-            }}
+            }},
+            {text: "Seek Shelter", nextScene: "seekShelter"},
         ]
     },
-    takeRelic: {
-        text: "You take the Forgotten Relic, feeling its power resonating within you...",
+
+    braveTheStorm: {
+        text: "Embracing the challenge, you venture into Stormy Pass, where dark clouds swirl and lightning flashes overhead. Through resilience and determination, you navigate through the tumultuous weather and reach the other side unscathed. Impressed by your bravery, the mountain spirits reward you with a shimmering gem of Resilience, symbolizing your ability to endure and overcome adversity. Your journey continues with enhanced resilience, bypassing a maze of sharp rocks that would have otherwise slowed your progress.",
+        image: "./img/stormyPass.png",
         options: [
-            { text: "Return to the Path", nextScene: "start" }
+            {text: "Whispering Wood", nextScene: "whisperingForest"},
+            {text: "Luminous Peak", nextScene: "lumionsPeak"}
         ]
     },
-    studyWaters: {
-        text: "You study the healing properties of the spring, enhancing your magic abilities...",
+
+    seekShelter: {
+        text: "Opting to seek shelter or find an alternative route around Stormy Pass, you wait out the storm or navigate a safer path. While you avoid immediate dangers, you miss the opportunity to demonstrate Courage in the face of elemental challenges and encounter a winding path that leads to a daunting cliff.",
+        image: "./img/stormyPass.png",
         options: [
-            { text: "Continue Exploring", nextScene: "exploreFurtherGrove" },
-            { text: "Return to the Path", nextScene: "start" }
+            {text: "Whispering Forest", nextScene: "whisperingForest"},
+            {text: "Luminous Peak", nextScene: "lumionsPeak"}
         ]
-    }
-    */
+    },
+
+    //Whispering Forest Option
+    whisperingForest: {
+        text: "To the right, a winding path leads into the Whispering Forest, where ancient trees whisper secrets of the past and pathways shift with each passing breeze.",
+        image: "./img/whisperingForest.png",
+        options: [
+            {text: "Listen to the Trees", action: function() {
+                gameState.gems.patience = true;
+                gameState.currentScene = "listenToTheTrees";
+                updateGame();
+            }},
+            {text: "Navigate the Shifting Paths", action: function() {
+                gameState.gems.adaptability = true;
+                gameState.currentScene = "navigateTheShiftingPaths";
+                updateGame();
+            }},
+        ]
+    },
+
+    listenToTheTrees: {
+        text: "Approaching the ancient trees, you quiet your mind and listen attentively to their whispers. They share tales of ancient heroes and offer cryptic advice for your journey. By showing respect and patience, you earn a shimmering gem of Patience, symbolizing your ability to listen and learn from the wisdom of others. Your journey continues with enhanced patience, navigating through a maze of illusions that would have otherwise misled you.",
+        image: "./img/whisperingForest.png",
+        options: [
+            {text: "Go to the Royal Castle", nextScene: "royalCastle"},
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    navigateTheShiftingPaths: {
+        text: "Choosing to navigate the shifting paths of the Whispering Woods, you rely on intuition and adaptability to find your way through the labyrinthine forest. Through perseverance and keen observation, you discover a hidden path guarded by ancient spirits, who reward you with a radiant gem of Adaptability. Your journey continues with newfound adaptability, bypassing a treacherous swamp that would have otherwise hinder your progress.",
+        image: "./img/whisperingForest.png",
+        options: [
+            {text: "Go to the Royal Castle", nextScene: "royalCastle"},
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    //Luminous Peak Option
+    luminousPeak: {
+        text: "To the left, a trail ascends towards the Luminous Peaks, where rare crystals grow amidst glowing flora, bathing the area in a surreal radiance.",
+        image: "./img/luminousPeak.png",
+        options: [
+            {text: "Collect Luminous Crystals", action: function() {
+                gameState.gems.harmony = true;
+                gameState.currentScene = "collectLuminousCrystals";
+                updateGame();
+            }},
+            {text: "Appreciate the Beauty", nextScene: "appreciateTheBeauty"},
+        ]
+    },
+
+    collectLuminousCrystals: {
+        text: "Intrigued by the rare crystals of the Luminous Peaks, you gather them carefully, feeling their mystical energy resonate within you. By respecting the delicate balance of nature, you receive a gleaming gem of Harmony, symbolizing your ability to find balance amidst beauty and power. Your journey continues with enhanced harmony, avoiding a perilous rockslide that would have otherwise blocked your path.",
+        image: "./img/luminousPeak.png",
+        options: [
+            {text: "Go to the Royal Castle", nextScene: "royalCastle"},
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    appreciateTheBeauty: {
+        text: "Taking a moment to admire the ethereal beauty of the Luminous Peaks, you pause to reflect on the wonder and majesty of the natural world. While you appreciate the beauty, you miss the opportunity to gain Insight from the crystals' energies and encounter a steep, rocky ascent that tests your endurance.",
+        image: "./img/luminousPeak.png",
+        options: [
+            {text: "Go to the Royal Castle", nextScene: "royalCastle"},
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+//--------------------------------------------------\\
+
+    //Start of the Royal Castle
+    royalCastle: {
+        text: "Your arrive at the majestic Royal Castle. Turrets rise towards teh sky and banners slutter in the breeze...",
+        image: "./img/royalCastle.png",
+        options: [
+            {text: "Go to the Royal Library", nextScene: "royalLibrary"},
+            {text: "Go to the Throne Room", nextScene: "throneRoom"},
+            {text: "Go to the Grand Courtyard", nextScene: "grandCourtyard"},
+            {text: "Go to the Enchanted Gardens", nextScene: "enchantedGarden"}
+        ]
+    },
+
+    //Royal Library Option
+    royalLibrary: {
+        text: "Passing through the breath-taking front gate of the castle, you find yourself being drawn to a spiriling tower reaching for the sky. Pushing the massive wooden door to the side reveals a sprawling library packed with books and scholars.",
+        image: "./img/royalLibrary.png",
+        options: [
+            {text: "Research Ancient Lore", action: function() {
+                gameState.gems.knowledge = true;
+                gameState.currentScene = "researchAncientLore";
+                updateGame();
+            }},
+            {text: "Seek Guidance from the Librarian", action: function() {
+                gameState.gems.wisdom = true;
+                gameState.currentScene = "seekGuidanceFromTheLibrarian";
+                updateGame();
+            }},
+        ]
+    },
+
+    researchAncientLore: {
+        text: "You become deeply facinated with the history of the kingdom you've ventured through. You find a radiant gem of Knowledge. With it you become a great scholar of the Royal Library.",
+        image: "./img/royalLibrary.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    seekGuidanceFromTheLibrarian: {
+        text: "You seek the guidance of the Great Librarian at the top of the spiriling tower. Looking out over the vast kingdom you come to a realization that your wisdom can be used to help, so you set off as a philosopher to teach the world.",
+        image: "./img/royalLibrary.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    //Throne Room Option
+    throneRoom: {
+        text: "Passing through the gates there is grand path leading up towards the main centeral castle. The path is flanked by rows upon rows of gaurds all watching as you climb the steps to the main hall.",
+        image: "./img/throneRoom.png",
+        options: [
+            {text: "Request Audience with the King and Queen", action: function() {
+                gameState.gems.leadership = true;
+                gameState.currentScene = "requestAudienceWithTheKingAndQueen";
+                updateGame();
+            }},
+            {text: "Observe a Court Proceeding", action: function() {
+                gameState.gems.justice = true;
+                gameState.currentScene = "observeACourtProceeding";
+                updateGame();
+            }},
+        ]
+    },
+
+    requestAudienceWithTheKingAndQueen: {
+        text: "Having your request accpeted, you enter the throne room and see two massive gold and silver thrones with the King and Queen sitting upon them. You kneel with your head bent, here you see a glowing stone at your feet. You pick it up and gain a gem of Leadership. You ask with a new found voice to join the kingdoms army and the King accepts. You climb your way through the ranks becoming a royal general of the army.",
+        image: "./img/throneRoom.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    observeACourtProceeding: {
+        text: "Wondering through the hall you sumble into a roayl court hearing. You decide to sit and watch justice being carried out. You're inspired as the judge carries out swift and accurate justice upon proven criminals. This inspiration manifests into a glowing gem of Justice. You further your knowledge and become a highly respected justice on the Royal Court.",
+        image: "./img/throneRoom.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    //Grand Courtyard Option
+    grandCourtyard: {
+        text: "Passing through the gates you make your way around the main castle to the back where a massive courtyard strechs out before you.",
+        image: "./img/grandcourtyard.png",
+        options: [
+            {text: "Challenge a Knight", action: function() {
+                gameState.gems.courage = true;
+                gameState.currentScene = "challengeAKnight";
+                updateGame();
+            }},
+            {text: "Visit the Merchants", action: function() {
+                gameState.gems.curiosity = true;
+                gameState.currentScene = "visitTheMerchants";
+                updateGame();
+            }},
+        ]
+    },
+
+    challengeAKnight: {
+        text: "As you pick up your weapon, you notice a glowing stone embedded in the hilt. You gain a gem of courage. Your heartbeat slows as a coolness passes over you filling you with passion and bravery. You overcome impossible odds by defeating every knight in the army catching the eye of the King who knights you so you can join the armies ranks.",
+        image: "./img/grandcourtyard.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    visitTheMerchants: {
+        text: "You approach a merchant and ask if you could ask him a few questions. The merchant agrees so you sit down and start firing off question after question the merchant is happy to answer all of them. A glistering gem forms in your hand and you gain a gem of curiosity. With this new found wonder you set off and become a extermely wealthy merchant.",
+        image: "./img/grandcourtyard.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    //Enchanted Gardens Option
+    enchantedGarden: {
+        text: "Passing through the gates you follow a less traveled path that leads you to a magnificent garden teeming with life.",
+        image: "./img/enchantedgardens.png",
+        options: [
+            {text: "Explore the Garden", action: function() {
+                gameState.gems.harmony = true;
+                gameState.currentScene = "exploreTheGarden";
+                updateGame();
+            }},
+            {text: "Seek Wisdom from Nature", action: function() {
+                gameState.gems.wisdom = true;
+                gameState.currentScene = "seekWisdomFromNature";
+                updateGame();
+            }},
+        ]
+    },
+
+    exploreTheGarden: {
+        text: "Venturing into the garden, you see beautiful flowers sprouting from bushes and animals running free through the trees. You come to a circle of rose pushes with a simple flat rock in the middle. Upon sitting on the rock you feel a warmth run up your spine and a small rock appears in your palm. You receive a gem of Harmony. With this new found understanding of the world and peace you become a royal diplomat searching to resolve conflicts peacefully.",
+        image: "./img/enchantedgardens.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
+
+    seekWisdomFromNature: {
+        text: "As you watch the animals play and plants grow, you sit and meditate searching for answers. Plants grow around you and animals come with food and water. After a while you open your eyes to see a small stone was placed in your hand. Your gain a gem of Wisdom. With this wisdom from nature you become a sage who's purpose is to save nature from destruction.",
+        image: "./img/enchantedgardens.png",
+        options: [
+            {text: "Return Home", nextScene: "start"}
+        ]
+    },
 };
 
 // Function to update the game interface with current scene and options
@@ -468,12 +643,9 @@ function updateGame() {
     const currentScene = scenes[gameState.currentScene];
     const gameTextElement = document.getElementById('game-text');
     const optionsContainer = document.getElementById('options-container');
-    const inventoryList = document.getElementById('inventory-list');
-    const strengthStat = document.getElementById('strength-stat');
-    const magicStat = document.getElementById('magic-stat');
-    const diplomacyStat = document.getElementById('diplomacy-stat');
     const sceneImageElement = document.getElementById('scene-image');
-
+    const gemCounterElement = document.getElementById('gem-counter'); // New element for displaying gem count
+    const gemsList = document.getElementById('gems-list'); // Add this line
 
     // Update scene image
     if (currentScene.image) {
@@ -502,6 +674,22 @@ function updateGame() {
         });
         optionsContainer.appendChild(button);
     });
+
+    gemCounterElement.textContent = `Gems: ${countTrueGems()}`;
+    gemCounterElement.textContent = `Gems: ${countTrueGems()}`;
+
+
+      // Update gems display
+      gemsList.innerHTML = '';
+      for (const gem in gameState.gems) {
+          if (gameState.gems.hasOwnProperty(gem) && gameState.gems[gem]) {
+              const gemItem = document.createElement('div');
+              gemItem.classList.add('gem');
+              gemItem.textContent = gem.charAt(0).toUpperCase() + gem.slice(1);
+              gemsList.appendChild(gemItem);
+          }
+      }
+
 
     // Update inventory display
     inventoryList.innerHTML = '';
@@ -535,7 +723,7 @@ function updateStats(choice) {
             break;
     }
 }
-
+   
 // Initialize game
 updateGame();
 
